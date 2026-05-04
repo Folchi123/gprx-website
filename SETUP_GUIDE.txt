@@ -1,0 +1,130 @@
+# GITHUB SETUP — STEP BY STEP
+# Greenpoint Pharmacy Website
+# ============================================================
+# Follow these steps IN ORDER. Each step has commands to copy-paste.
+# ============================================================
+
+
+# ── STEP 1: CREATE YOUR GITHUB ACCOUNT (do this in your browser) ──────────
+#
+#  1. Go to:  https://github.com/signup
+#  2. Enter your email address
+#  3. Create a password
+#  4. Choose a username  →  suggested: greenpointrx  or  gprxpharmacy
+#  5. Verify your account (check email for code)
+#
+# ── STEP 2: INSTALL GIT ON YOUR COMPUTER ──────────────────────────────────
+#
+#  Mac:
+#    Open Terminal and run:
+#    xcode-select --install
+#    (click Install when prompted)
+#
+#  Windows:
+#    Download from:  https://git-scm.com/download/win
+#    Run the installer (click Next through everything)
+#    After install, open "Git Bash" from your Start menu
+#
+# ── STEP 3: TELL GIT WHO YOU ARE (one-time setup) ─────────────────────────
+#
+#  Open Terminal (Mac) or Git Bash (Windows) and run:
+
+git config --global user.name "Greenpoint Pharmacy"
+git config --global user.email "pharmacygprx@gmail.com"
+
+# ── STEP 4: CREATE THE REPO ON GITHUB (do this in your browser) ───────────
+#
+#  1. Log into github.com
+#  2. Click the green "New" button (top-left)
+#  3. Repository name:  gprx-website
+#  4. Set to:  Public  (required for free GitHub Pages hosting)
+#  5. Do NOT check "Add a README" (we already have one)
+#  6. Click "Create repository"
+#  7. Leave this page open — you'll need the URL in Step 5
+#
+# ── STEP 5: UPLOAD YOUR FILES TO GITHUB ───────────────────────────────────
+#
+#  In Terminal / Git Bash, navigate to your website folder.
+#  Replace /path/to/gprx-website with the actual folder on your computer.
+
+cd /path/to/gprx-website
+
+#  Initialize git, add files, and push to GitHub:
+#  (Replace YOUR-USERNAME with your actual GitHub username)
+
+git init
+git add .
+git commit -m "Initial commit — Greenpoint Pharmacy website"
+git branch -M main
+git remote add origin https://github.com/YOUR-USERNAME/gprx-website.git
+git push -u origin main
+
+# ── STEP 6: ENABLE GITHUB PAGES (free hosting) ────────────────────────────
+#
+#  1. Go to your repo on github.com
+#  2. Click "Settings" tab (top of the repo page)
+#  3. Click "Pages" in the left sidebar
+#  4. Under "Source", select:  GitHub Actions
+#  5. The workflow file we created will auto-deploy on every push
+#
+#  Your site will be live at:
+#  https://YOUR-USERNAME.github.io/gprx-website/
+#
+# ── STEP 7: CONNECT YOUR CUSTOM DOMAIN gprxpharmacy.com ───────────────────
+#
+#  In GitHub:
+#  1. Go to Settings → Pages → Custom domain
+#  2. Type:  gprxpharmacy.com
+#  3. Click Save
+#  4. GitHub will create a CNAME file automatically
+#
+#  In your domain registrar (GoDaddy, Namecheap, etc.):
+#  Add these DNS records:
+#
+#  Type   | Name  | Value
+#  -------|-------|---------------------------
+#  A      |   @   | 185.199.108.153
+#  A      |   @   | 185.199.109.153
+#  A      |   @   | 185.199.110.153
+#  A      |   @   | 185.199.111.153
+#  CNAME  |  www  | YOUR-USERNAME.github.io
+#
+#  DNS changes take 10 minutes to 48 hours to propagate.
+#
+# ── STEP 8: ENABLE HTTPS ──────────────────────────────────────────────────
+#
+#  After DNS propagates:
+#  1. Go to GitHub → Settings → Pages
+#  2. Check "Enforce HTTPS"
+#  3. Done — your site is live at https://gprxpharmacy.com
+#
+# ══════════════════════════════════════════════════════════════
+# HOW TO PUSH UPDATES IN THE FUTURE
+# ══════════════════════════════════════════════════════════════
+#
+#  Whenever you edit index.html (or any file), run these 3 commands:
+
+git add .
+git commit -m "brief description of what you changed"
+git push
+
+#  GitHub will automatically redeploy your site within ~60 seconds.
+#
+# ══════════════════════════════════════════════════════════════
+# TROUBLESHOOTING
+# ══════════════════════════════════════════════════════════════
+#
+#  "Permission denied" when pushing?
+#  → GitHub now uses Personal Access Tokens instead of passwords.
+#  → Go to: github.com → Settings → Developer Settings
+#         → Personal Access Tokens → Tokens (classic) → Generate new
+#  → Select "repo" scope, generate, copy the token
+#  → Use the token as your password when prompted
+#
+#  Site not updating after push?
+#  → Go to your repo → Actions tab → check if workflow ran
+#  → If failed, click on it to see the error message
+#
+#  Custom domain not working?
+#  → DNS changes can take up to 48 hours — wait and try again
+#  → Make sure all 4 A records are added at your registrar
